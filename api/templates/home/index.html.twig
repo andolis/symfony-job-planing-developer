@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Haftalık Çizelgeler {% endblock %}
+
+{% block body %}
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+    {% for key, value in taskList %}
+        <table style="margin: 10px auto; width: 100%; text-align: center;">
+            <thead>
+                <tr>
+                    <th colspan="5"> DEV{{(key+1)}}</th>
+                </tr>
+                <tr>
+                    <th> Hafta </th>
+                    <th> İş Planları </th>
+                    <th> Toplam Süre </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for e, w in value.tasksList %}
+                    <tr>
+                        <td> {{(e+1)}}</td>
+                        <td>
+                            <table border="1" style="margin: 5px auto; width: 100%;">
+                                <thead>
+                                    <tr>
+                                        <th> İş Planı</th>
+                                        <th> Süre </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for i, f in w.lists %}
+                                        <tr>
+                                            <td width="50%"> {{ f.name }}</td>
+                                            <td width="50%"> {{ f.duration }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </td>
+                        <td> {{ w.durations }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endfor %}
+
+{% endblock %}
